@@ -28,12 +28,9 @@
         <ItemTemplate>
             <dl class="member-card">
                 <dt>
-                    <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl='<%# Eval("PostId", "~/Details.aspx?id={0}") %>'><%# Eval("PostId") %></asp:HyperLink></dt>
+                    <asp:HyperLink ID="DetailsLink" runat="server" NavigateUrl='<%# Eval("PostId", "~/PostDetails.aspx?id={0}") %>'><%# Eval("PostId") %></asp:HyperLink></dt>
                 <dd>
                     <%# Eval("Value") %></dd>
-                <%--<dd>
-                    <%# Eval("Mail") %>
-                </dd>--%>
             </dl>
         </ItemTemplate>
     </asp:ListView>

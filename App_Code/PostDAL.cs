@@ -163,7 +163,7 @@ using MySql.Data.MySqlClient;
 
                     // Lägger till den paramter den lagrade proceduren kräver. Använder här det MINDRE effektiva 
                     // sätttet att göra det på - enkelt, men ASP.NET behöver "jobba" rätt mycket.
-                    cmd.Parameters.AddWithValue("@PostId", postId);
+                    cmd.Parameters.AddWithValue("@Id", postId);
 
                     // Öppnar anslutningen till databasen.
                     conn.Open();
@@ -234,7 +234,7 @@ using MySql.Data.MySqlClient;
                     // utan hämtar data från den. (Fungerar ungerfär som ref- och out-prameterar i C#.) Värdet 
                     // parametern kommer att ha EFTER att den lagrade proceduren exekverats är primärnycklens värde
                     // den nya posten blivit tilldelad av databasen.
-                    cmd.Parameters.Add("@PostId", MySqlDbType.Int32, 4).Direction = ParameterDirection.Output;
+                    //cmd.Parameters.Add("@PostId", MySqlDbType.Int32, 4).Direction = ParameterDirection.Output;
 
                     // Öppnar anslutningen till databasen.
                     conn.Open();
@@ -245,7 +245,9 @@ using MySql.Data.MySqlClient;
 
                     // Hämtar primärnyckelns värde för den nya posten och tilldelar Member-objektet värdet.
                     //Varför får jag null-värde här? Har ingen out parameter för postid
-                    post.PostId = (int)cmd.Parameters["@PostId"].Value;
+                    //post.PostId = (int)cmd.Parameters["@PostId"].Value;
+
+
                 }
                 catch
                 {
@@ -310,7 +312,7 @@ using MySql.Data.MySqlClient;
 
                     // Lägger till de paramterar den lagrade proceduren kräver. Använder här det effektiva sätttet att
                     // göra det på - något "svårare" men ASP.NET behöver inte "jobba" så mycket.
-                    cmd.Parameters.Add("@PostId", MySqlDbType.Int32, 4).Value = postId;
+                    cmd.Parameters.Add("@Id", MySqlDbType.Int32, 4).Value = postId;
 
                     // Öppnar anslutningen till databasen.
                     conn.Open();

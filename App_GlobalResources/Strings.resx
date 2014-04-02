@@ -162,11 +162,14 @@
   <data name="Member_Deleting_Error" xml:space="preserve">
     <value>Ett fel inträffade då kunden skulle tas bort.</value>
   </data>
+    <data name="Post_Deleting_Error" xml:space="preserve">
+    <value>An error occured while deleting the post.</value>
+  </data>
   <data name="Member_Saving_Error" xml:space="preserve">
     <value>Ett fel inträffade då kunden skulle sparas.</value>
   </data>
   <data name="Data_Type_Post" xml:space="preserve">
-    <value>kontaktuppgiften</value>
+    <value>the post</value>
   </data>
   <data name="Data_Type_Member" xml:space="preserve">
     <value>kunden</value>

@@ -15,7 +15,7 @@ namespace TopicMaster
         {
             // Kunduppgifterna sparade varför användaren dirigeras till en
             // rättmeddelandesida.
-            string url = String.Format("~/Success.aspx?returnUrl=~/Details.aspx?id={0}&action=Post_Saved",
+            string url = String.Format("~/Success.aspx?returnUrl=~/PostDetails.aspx?id={0}&action=Post_Saved",
                 e.Post.PostId);
             Response.Redirect(url, false);
         }
