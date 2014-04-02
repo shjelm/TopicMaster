@@ -224,6 +224,9 @@ using MySql.Data.MySqlClient;
                     MySqlCommand cmd = new MySqlCommand("InsertPost", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
 
+                    MySqlCommand cmd2 = new MySqlCommand("GetPostId", conn);
+                    cmd2.CommandType = CommandType.StoredProcedure;
+
 
                     // Lägger till de paramterar den lagrade proceduren kräver. Använder här det effektiva sätttet att
                     // göra det på - något "svårare" men ASP.NET behöver inte "jobba" så mycket.
@@ -243,11 +246,14 @@ using MySql.Data.MySqlClient;
                     // ExecuteNonQuery används för att exekvera den lagrade proceduren.
                     cmd.ExecuteNonQuery();
 
-                    // Hämtar primärnyckelns värde för den nya posten och tilldelar Member-objektet värdet.
-                    //Varför får jag null-värde här? Har ingen out parameter för postid
-                    //post.PostId = (int)cmd.Parameters["@PostId"].Value;
+                    using (var reader = cmd2.ExecuteReader())
+                    {
 
-
+                        reader.Read();
+                        {
+                            post.PostId = reader.GetInt32(0);
+                        }
+                    }
                 }
                 catch
                 {
@@ -275,7 +281,7 @@ using MySql.Data.MySqlClient;
 
                     // Lägger till de paramterar den lagrade proceduren kräver. Använder här det effektiva sätttet att
                     // göra det på - något "svårare" men ASP.NET behöver inte "jobba" så mycket.
-                    cmd.Parameters.Add("@PostId", MySqlDbType.Int32, 4).Value = post.PostId;
+                    cmd.Parameters.Add("@Id", MySqlDbType.Int32, 4).Value = post.PostId;
                     cmd.Parameters.Add("@MemberId", MySqlDbType.Int32, 4).Value = post.MemberId;
                     cmd.Parameters.Add("@Value", MySqlDbType.VarChar, 500).Value = post.Value;
 

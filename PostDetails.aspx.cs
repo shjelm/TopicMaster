@@ -67,7 +67,7 @@ public partial class PostDetails : System.Web.UI.Page
                 // Kunduppgifterna tas bort och användaren dirigeras till en
                 // rättmeddelandesida, eller så...
                 Service service = new Service();
-                service.DeleteMember(Convert.ToInt32(e.CommandArgument));
+                service.DeletePost(Convert.ToInt32(e.CommandArgument));
                 Response.Redirect("~/Success.aspx?returnUrl=~/ShowPosts.aspx&action=Post_Deleted");
             }
             catch

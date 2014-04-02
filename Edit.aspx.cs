@@ -7,50 +7,16 @@ using System.Web.UI.WebControls;
 using System.ComponentModel;
 using System.Reflection;
 
-namespace TopicMaster
-{
-    public partial class Create : System.Web.UI.Page
+    public partial class Edit : System.Web.UI.Page
     {
-        protected void PostEdit_Saved(object sender, SavedEventArgs e)
-        {
-            // Kunduppgifterna sparade varför användaren dirigeras till en
-            // rättmeddelandesida.
-            string url = String.Format("~/Success.aspx?returnUrl=~/PostDetails.aspx?id={0}&action=Post_Saved",
-                e.Post.PostId);
-            Response.Redirect(url, false);
-        }
-
-        protected void PostEdit_Canceled(object sender, EventArgs e)
-        {
-            // Kunduppgifterna inte sparade varför användaren dirigeras till startsidan.
-            Response.Redirect("~/", false);
-        }
-        #region Händelser
-
-        // Definierar ett nytt delegat som representerar signaturen som
-        // händelsen Saved har.
         public delegate void SavedEventHandler(object sender, SavedEventArgs e);
 
         // Definierar publika händelsemedlemmar.
         public event SavedEventHandler Saved;
         public event EventHandler Canceled;
 
-        #endregion
-
-        #region Fält
-
         private int _postId;
         private int _memberId;
-
-        #endregion
-
-        #region Egenskaper
-
-        //public bool PostVisible
-        //{
-        //    get { return CommentEdit1.Visible; }
-        //    set { CommentEdit1.Visible = value; }
-        //}
 
         public int PostId
         {
@@ -66,26 +32,82 @@ namespace TopicMaster
 
         public string Value
         {
-            get { return PostValueTextBox.Text; }
-            set { PostValueTextBox.Text = value; }
+            get { return EditValue.Text; }
+            set { EditValue.Text = value; }
         }
-        #endregion
+
+        protected override void OnInit(EventArgs e)
+        {
+            // Låt sidan veta att "control state" används.
+            Page.RegisterRequiresControlState(this);
+            base.OnInit(e);
+        }
+
+
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                Post post = null;
+                try
+                {
+                    // ...hämta kundnumret från "query string"-variabeln,...
+                    int postId = Convert.ToInt32(Request.QueryString["id"]);
+
+                    // ...hämta kunduppgifterna och...
+                    Service service = new Service();
+                    post = service.GetPostByPostId(postId);
+                }
+                catch
+                {
+                    // Tom! "Äter upp" bara upp undantaget!
+                }
+
+                // ...kontrollera om det verkligen finns några kunduppgifter, i så fall så...
+                if (post != null)
+                {
+                    EditValue.Text = post.Value;
+                }
+                else
+                {
+                    // ...om inga kunduppgifter kunde hittas dirigeras 
+                    // användaren till en meddelandesida.
+                    Response.Redirect("~/NotFound.aspx", false);
+                }
+            }
+        }
+
+        protected void MemberEdit_Saved(object sender, SavedEventArgs e)
+        {
+            // Kunduppgifterna sparade varför användaren dirigeras till en
+            // rättmeddelandesida.
+            Response.Redirect(String.Format("~/Success.aspx?returnUrl=Details.aspx?id={0}&action=Post_Saved",
+                e.Post.PostId), false);
+        }
+
+        protected void MemberEdit_Canceled(object sender, EventArgs e)
+        {
+            // Kunduppgifterna inte sparade varför användaren dirigeras till detaljsidan.
+            Response.Redirect(String.Format("~/Details.aspx?id={0}", Convert.ToInt32(Request.QueryString["id"])), false);
+        }
 
         protected void SaveButton_Click(object sender, EventArgs e)
         {
             // Om valideringen är OK så...
             if (Page.IsValid)
             {
+                Post post = null;
                 try
                 {
+                    int postId = Convert.ToInt32(Request.QueryString["id"]);
+
+                    // ...hämta kunduppgifterna och...
+                    Service service = new Service();
+                    post = service.GetPostByPostId(postId);
+
                     // ...skapa ett nytt Member-objekt och initiera det
                     // med värdena från textfälten och...
-                    Post post = new Post
-                    {
-                        MemberId = MemberId,
-                        Value = Value,
-                        PostId = PostId
-                    };
+                    post.Value = EditValue.Text;                    
 
                     // ...veriferera att objektet uppfyller affärsreglerna...
                     if (!post.IsValid)
@@ -97,7 +119,6 @@ namespace TopicMaster
                     }
 
                     // ...spara objektet.
-                    Service service = new Service();
                     service.SavePost(post);
 
                     Response.Redirect("~/Success.aspx", false);
@@ -133,8 +154,7 @@ namespace TopicMaster
                 Response.Redirect("~/", false);
             }
         }
-
-            #region Privata hjälpmetoder
+        #region Privata hjälpmetoder
 
         /// <summary>
         /// Lägger till ett CustomValidator-objekt till samlingen ValidatorCollection.
@@ -173,5 +193,49 @@ namespace TopicMaster
         }
 
         #endregion
+
+        protected override void LoadControlState(object savedState)
+        {
+            if (savedState != null)
+            {
+                Pair p = savedState as Pair;
+                if (p != null)
+                {
+                    base.LoadControlState(p.First);
+                    this._postId = (int)p.Second;
+                }
+                else
+                {
+                    if (savedState is int)
+                    {
+                        this._postId = (int)savedState;
+                    }
+                    else
+                    {
+                        base.LoadControlState(savedState);
+                    }
+                }
+            }
+        }
+
+        protected override object SaveControlState()
+        {
+            object obj = base.SaveControlState();
+
+            if (this._postId != 0)
+            {
+                if (obj != null)
+                {
+                    return new Pair(obj, this._memberId);
+                }
+                else
+                {
+                    return (this._postId);
+                }
+            }
+            else
+            {
+                return obj;
+            }
         }
     }

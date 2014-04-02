@@ -50,9 +50,9 @@ using System.Web.Caching;
         /// Tar bort specifierad kontaktuppgift ur databasen.
         /// </summary>
         /// <param name="post">Kontaktuppgift som ska tas bort.</param>
-        public void DeletePost(Post post) // ObjectDataSource kräver att en Delete-metod
+        public void DeletePost(int postId) // ObjectDataSource kräver att en Delete-metod
         {                                             // med en parameter av typen Member.
-            PostDAL.DeletePost(post.PostId);
+            PostDAL.DeletePost(postId);
         }
 
         /// <summary>

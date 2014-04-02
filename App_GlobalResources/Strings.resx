@@ -157,7 +157,7 @@
     <value>You must enter a post.</value>
   </data>
   <data name="Member_Delete_Confirm" xml:space="preserve">
-    <value>Är du säker på att du vill ta bort '{0}'?</value>
+    <value>Are you sure you want to delete '{0}'?</value>
   </data>
   <data name="Member_Deleting_Error" xml:space="preserve">
     <value>Ett fel inträffade då kunden skulle tas bort.</value>
