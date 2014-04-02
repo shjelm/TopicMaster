@@ -141,32 +141,32 @@ using System.Web.Caching;
         /// Spara en kunds kunduppgifter i databasen.
         /// </summary>
         /// <param name="member">Kunduppgifter som ska sparas.</param>
-        public void SaveMember(Member member)
-        {
-            // Klarar objektet validering i affärslogiklagret?
-            if (member.IsValid)
-            {
-                // Member-objektet sparas antingen genom att en ny post 
-                // skapas eller genom att en befintlig post uppdateras.
-                if (member.MemberId == 0) // Ny post om MemberId är 0!
-                {
-                    MemberDAL.InsertMember(member);
-                }
-                else
-                {
-                    MemberDAL.UpdateMember(member);
-                }
-            }
-            else
-            {
-                // Uppfyller inte objektet affärsreglerna kastas ett undantag med
-                // ett allmänt felmeddelande samt en referens till objektet som 
-                // inte klarade valideringen.
-                ApplicationException ex = new ApplicationException(member.Error);
-                ex.Data.Add("Member", member);
-                throw ex;
-            }
-        }
+        //public void SaveMember(Member member)
+        //{
+        //    // Klarar objektet validering i affärslogiklagret?
+        //    if (member.IsValid)
+        //    {
+        //        // Member-objektet sparas antingen genom att en ny post 
+        //        // skapas eller genom att en befintlig post uppdateras.
+        //        if (member.MemberId == 0) // Ny post om MemberId är 0!
+        //        {
+        //            MemberDAL.InsertMember(member);
+        //        }
+        //        else
+        //        {
+        //            MemberDAL.UpdateMember(member);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        // Uppfyller inte objektet affärsreglerna kastas ett undantag med
+        //        // ett allmänt felmeddelande samt en referens till objektet som 
+        //        // inte klarade valideringen.
+        //        ApplicationException ex = new ApplicationException(member.Error);
+        //        ex.Data.Add("Member", member);
+        //        throw ex;
+        //    }
+        //}
 
         #endregion
 

@@ -53,7 +53,7 @@ public class Post : BusinessObjectBase, ICloneable
                 // mappas mot ett felmeddelande.
                 base.ValidationErrors.Add("Value", "You need to enter a value");
             }
-            else if (value.Length > 50)
+            else if (value.Length > 500)
             {
                 // Om strängen innehåller fler än 50 tecken kan inte det fullständiga 
                 // datat inte sparas i databastabellen vilket är att betrakta som ett fel.

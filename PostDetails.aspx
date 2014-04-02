@@ -13,8 +13,8 @@
         <asp:Label ID="PostLabel" runat="server" />
     </div>
     <p>
-        <asp:LinkButton ID="EditButton" runat="server">Edit</asp:LinkButton>
-        <asp:LinkButton ID="DeleteButton" runat="server" OnCommand="DeleteButton_Command">Delete</asp:LinkButton></p>
+        <asp:LinkButton ID="EditButton" runat="server" Visible="false">Edit</asp:LinkButton>
+        <asp:LinkButton ID="DeleteButton" runat="server" OnCommand="DeleteButton_Command" Visible="false">Delete</asp:LinkButton></p>
 </asp:Content>
 <%--<asp:Content ID="Content3" ContentPlaceHolderID="ScriptContent" Runat="Server">
     <script src="<%= ResolveClientUrl("~/Scripts/delete-confirm.js") %>" type="text/javascript"></script>

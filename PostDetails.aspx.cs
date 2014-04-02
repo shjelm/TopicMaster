@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Resources;
@@ -21,6 +22,13 @@ public partial class PostDetails : System.Web.UI.Page
                 // ...hämta kunduppgifterna och...
                 Service service = new Service();
                 post = service.GetPostByPostId(postId);
+
+
+                if ((int)Membership.GetUser().ProviderUserKey == post.MemberId || Roles.IsUserInRole("administrator"))
+                {
+                    EditButton.Visible = true;
+                    DeleteButton.Visible = true;
+                }
             }
             catch
             {

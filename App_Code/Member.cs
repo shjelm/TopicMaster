@@ -10,10 +10,9 @@ using Resources;
     {
         #region Fält
 
-        private string _name;
         private string _username;
         private string _mail;
-        private string _password; 
+        private string _password;
 
 
         #endregion
@@ -22,7 +21,6 @@ using Resources;
 
         public Member()
         {
-            this.Name = null;
             this.Username = null;
             this.Mail = null;
             this.Password = null;
@@ -34,36 +32,7 @@ using Resources;
 
         // Egenskapernas namn och typ ges av tabellen
         // Member i databasen.
-        public int MemberId { get; set; }
-
-        public string Name
-        {
-            get { return this._name; }
-            set
-            {
-                // Antar att värdet är korrekt.
-                this.ValidationErrors.Remove("Name");
-
-                // Undersöker om värdet är korrekt beträffande om strängen är null
-                // eller tom för i så fall...
-                if (String.IsNullOrWhiteSpace(value))
-                {
-                    // ...är det ett fel varför nyckel Name (namnet på egenskapen)
-                    // mappas mot ett felmeddelande.
-                    this.ValidationErrors.Add("Name", Strings.Member_Name_Required);
-                }
-                else if (value.Length > 30)
-                {
-                    // Om strängen innehåller fler än 30 tecken kan inte det fullständiga 
-                    // datat inte sparas i databastabellen vilket är att betrakta som ett fel.
-                    this.ValidationErrors.Add("Name", Strings.Member_Name_MaxLength);
-                }
-
-                // Tilldelar fältet värdet, oavsett om det är ett korrekt värde 
-                // enligt affärsreglerna eller inte.
-                this._name = value != null ? value.Trim() : null;
-            }
-        }
+        public int userId { get; set; }
 
         public string Username
         {

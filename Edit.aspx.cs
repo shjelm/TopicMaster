@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.Security;
 using System.ComponentModel;
 using System.Reflection;
 
@@ -57,6 +58,12 @@ using System.Reflection;
                     // ...hämta kunduppgifterna och...
                     Service service = new Service();
                     post = service.GetPostByPostId(postId);
+
+                    if ((int)Membership.GetUser().ProviderUserKey == post.MemberId || Roles.IsUserInRole("administrator"))
+                    {
+                        SaveButton.Visible = true;
+                        CancelButton.Visible = true;
+                    }
                 }
                 catch
                 {
@@ -107,7 +114,8 @@ using System.Reflection;
 
                     // ...skapa ett nytt Member-objekt och initiera det
                     // med värdena från textfälten och...
-                    post.Value = EditValue.Text;                    
+                    post.Value = EditValue.Text;
+                    post.MemberId = (int)Membership.GetUser().ProviderUserKey;
 
                     // ...veriferera att objektet uppfyller affärsreglerna...
                     if (!post.IsValid)

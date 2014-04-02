@@ -60,8 +60,7 @@ using MySql.Data.MySqlClient;
                             // Du måste känna till SQL-satsen för att kunna välja rätt GetXxx-metod.
                             members.Add(new Member
                             {
-                                MemberId = reader.GetInt32(memberIdIndex),
-                                Name = reader.GetString(nameIndex),
+                                userId = reader.GetInt32(memberIdIndex),
                                 Mail = reader.GetString(mailIndex),
                                 Username = reader.GetString(usernameIndex),
                                 Password = reader.GetString(passwordIndex)
@@ -128,8 +127,7 @@ using MySql.Data.MySqlClient;
                             // Returnerar referensen till de skapade Post-objektet.
                             return new Member
                             {
-                                MemberId = reader.GetInt32(memberIdIndex),
-                                Name = reader.GetString(nameIndex),
+                                userId = reader.GetInt32(memberIdIndex),
                                 Mail = reader.GetString(mailIndex),
                                 Password = reader.GetString(passwordIndex),
                                 Username = reader.GetString(usernameIndex)
@@ -169,8 +167,7 @@ using MySql.Data.MySqlClient;
                     //@TODO: kolla så att längden stämmer
 
                     // Lägger till de paramterar den lagrade proceduren kräver. Använder här det effektiva sätttet att
-                    // göra det på - något "svårare" men ASP.NET behöver inte "jobba" så mycket.
-                    cmd.Parameters.Add("@Name", MySqlDbType.VarChar, 30).Value = member.Name;
+                    // göra det på - något "svårare" men ASP.NET behöver inte "jobba" så mycket
                     cmd.Parameters.Add("@Mail", MySqlDbType.VarChar, 50).Value = member.Mail;
                     cmd.Parameters.Add("@Username", MySqlDbType.VarChar, 30).Value = member.Username;
                     cmd.Parameters.Add("@Password", MySqlDbType.VarChar, 20).Value = member.Password;
@@ -189,7 +186,7 @@ using MySql.Data.MySqlClient;
                     cmd.ExecuteNonQuery();
 
                     // Hämtar primärnyckelns värde för den nya posten och tilldelar Member-objektet värdet.
-                    member.MemberId = (int)cmd.Parameters["@MemberId"].Value;
+                    member.userId = (int)cmd.Parameters["@MemberId"].Value;
                 }
                 catch
                 {
@@ -219,8 +216,7 @@ using MySql.Data.MySqlClient;
 
                     // Lägger till de paramterar den lagrade proceduren kräver. Använder här det effektiva sätttet att
                     // göra det på - något "svårare" men ASP.NET behöver inte "jobba" så mycket.
-                    cmd.Parameters.Add("@MemberId", MySqlDbType.Int32, 4).Value = member.MemberId;
-                    cmd.Parameters.Add("@Name", MySqlDbType.VarChar, 30).Value = member.Name;
+                    cmd.Parameters.Add("@MemberId", MySqlDbType.Int32, 4).Value = member.userId;
                     cmd.Parameters.Add("@Mail", MySqlDbType.VarChar, 50).Value = member.Mail;
                     cmd.Parameters.Add("@Username", MySqlDbType.VarChar, 20).Value = member.Username;
                     cmd.Parameters.Add("@Password", MySqlDbType.VarChar, 30).Value = member.Password;

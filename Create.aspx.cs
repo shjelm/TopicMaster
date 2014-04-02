@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.ComponentModel;
@@ -78,6 +79,7 @@ namespace TopicMaster
             {
                 try
                 {
+                    MemberId = (int)Membership.GetUser().ProviderUserKey;
                     // ...skapa ett nytt Member-objekt och initiera det
                     // med värdena från textfälten och...
                     Post post = new Post
@@ -86,6 +88,8 @@ namespace TopicMaster
                         Value = Value,
                         PostId = PostId
                     };
+
+                     
 
                     // ...veriferera att objektet uppfyller affärsreglerna...
                     if (!post.IsValid)
