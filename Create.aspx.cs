@@ -12,20 +12,20 @@ namespace TopicMaster
 {
     public partial class Create : System.Web.UI.Page
     {
-        protected void PostEdit_Saved(object sender, SavedEventArgs e)
-        {
-            // Kunduppgifterna sparade varför användaren dirigeras till en
-            // rättmeddelandesida.
-            string url = String.Format("~/Success.aspx?returnUrl=~/PostDetails.aspx?id={0}&action=Post_Saved",
-                e.Post.PostId);
-            Response.Redirect(url, false);
-        }
+        //protected void PostEdit_Saved(object sender, SavedEventArgs e)
+        //{
+        //    // Kunduppgifterna sparade varför användaren dirigeras till en
+        //    // rättmeddelandesida.
+        //    string url = String.Format("~/Success.aspx?returnUrl=~/PostDetails.aspx?id={0}&action=Post_Saved",
+        //        e.Post.PostId);
+        //    Response.Redirect(url, false);
+        //}
 
-        protected void PostEdit_Canceled(object sender, EventArgs e)
-        {
-            // Kunduppgifterna inte sparade varför användaren dirigeras till startsidan.
-            Response.Redirect("~/", false);
-        }
+        //protected void PostEdit_Canceled(object sender, EventArgs e)
+        //{
+        //    // Kunduppgifterna inte sparade varför användaren dirigeras till startsidan.
+        //    Response.Redirect("~/", false);
+        //}
         #region Händelser
 
         // Definierar ett nytt delegat som representerar signaturen som
@@ -104,7 +104,7 @@ namespace TopicMaster
                     Service service = new Service();
                     service.SavePost(post);
 
-                    Response.Redirect("~/Success.aspx", false);
+                    Response.Redirect("~/ViewPosts.aspx", false);
 
                     // Om någon abbonerar på händelsen Saved...
                     if (Saved != null)
@@ -113,7 +113,7 @@ namespace TopicMaster
                         // en referens till kunduppgifterna som sparats.
                         Saved(this, new SavedEventArgs(post));
 
-                        Response.Redirect("~/Success.aspx", false);
+                        Response.Redirect("~/ViewPosts.aspx", false);
                     }
                 }
                 catch

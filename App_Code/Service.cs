@@ -202,7 +202,7 @@ using System.Web.Caching;
             {
                 // Post-objektet sparas antingen genom att en ny post 
                 // skapas eller genom att en befintlig post uppdateras.
-                if (comment.PostId == 0) // Ny post om PostID är 0!
+                if (comment.CommentId == 0) // Ny post om PostID är 0!
                 {
                     CommentDAL.InsertComment(comment);
                 }

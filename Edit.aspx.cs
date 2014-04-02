@@ -129,7 +129,7 @@ using System.Reflection;
                     // ...spara objektet.
                     service.SavePost(post);
 
-                    Response.Redirect("~/Success.aspx", false);
+                    Response.Redirect("~/ViewPosts.aspx", false);
 
                     // Om någon abbonerar på händelsen Saved...
                     if (Saved != null)
@@ -138,7 +138,7 @@ using System.Reflection;
                         // en referens till kunduppgifterna som sparats.
                         Saved(this, new SavedEventArgs(post));
 
-                        Response.Redirect("~/Success.aspx", false);
+                        Response.Redirect("~/ViewPosts.aspx", false);
                     }
                 }
                 catch

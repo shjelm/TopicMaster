@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Web;
+using System.ComponentModel;
+using System.Text.RegularExpressions;
 using Resources;
 
-public class Comment: BusinessObjectBase, ICloneable
+    public class CommentOld : BusinessObjectBase, ICloneable
         {
             #region Fält
 
@@ -16,7 +18,7 @@ public class Comment: BusinessObjectBase, ICloneable
 
             #region Konstruktorer
 
-            public Comment()
+            public CommentOld()
             {
                 // Ombesörjer att objektets alla värden valideras genom att använda
                 // egenskaperna istället för fälten direkt.
@@ -77,5 +79,4 @@ public class Comment: BusinessObjectBase, ICloneable
             }
 
             #endregion
-
-}
+        }

@@ -151,7 +151,7 @@
     <value>An unexpected error occured while updating the post.</value>
   </data>
   <data name="Post_Value_MaxLength" xml:space="preserve">
-    <value>Kontaktinformationen kan bestå av som mest 50 tecken.</value>
+    <value>Kontaktinformationen kan bestå av som mest 500 tecken.</value>
   </data>
   <data name="Post_Value_Required" xml:space="preserve">
     <value>You must enter a post.</value>

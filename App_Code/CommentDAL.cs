@@ -92,8 +92,11 @@ using MySql.Data.MySqlClient;
                 {
                     // Skapar och initierar ett SqlCommand-objekt som används till att 
                     // exekveras specifierad lagrad procedur.
-                    MySqlCommand cmd = new MySqlCommand("app.uspInsertComment", conn);
+                    MySqlCommand cmd = new MySqlCommand("InsertComment", conn);
                     cmd.CommandType = CommandType.StoredProcedure;
+
+                    MySqlCommand cmd2 = new MySqlCommand("GetCommentId", conn);
+                    cmd2.CommandType = CommandType.StoredProcedure;
 
                     // Lägger till de paramterar den lagrade proceduren kräver. Använder här det effektiva sätttet att
                     // göra det på - något "svårare" men ASP.NET behöver inte "jobba" så mycket.
@@ -105,7 +108,8 @@ using MySql.Data.MySqlClient;
                     // utan hämtar data från den. (Fungerar ungerfär som ref- och out-prameterar i C#.) Värdet 
                     // parametern kommer att ha EFTER att den lagrade proceduren exekverats är primärnycklens värde
                     // den nya posten blivit tilldelad av databasen.
-                    cmd.Parameters.Add("@CommentId", MySqlDbType.Int32, 4).Direction = ParameterDirection.Output;
+                    //cmd.Parameters.Add("@CommentId", MySqlDbType.Int32, 4).Direction = ParameterDirection.Output;
+
 
                     // Öppnar anslutningen till databasen.
                     conn.Open();
@@ -114,8 +118,17 @@ using MySql.Data.MySqlClient;
                     // ExecuteNonQuery används för att exekvera den lagrade proceduren.
                     cmd.ExecuteNonQuery();
 
+                    using (var reader = cmd2.ExecuteReader())
+                    {
+
+                        reader.Read();
+                        {
+                            comment.CommentId = reader.GetInt32(0);
+                        }
+                    }
+
                     // Hämtar primärnyckelns värde för den nya posten och tilldelar Member-objektet värdet.
-                    comment.CommentId = (int)cmd.Parameters["@CommentId"].Value;
+                    //comment.CommentId = (int)cmd.Parameters["@CommentId"].Value;
                 }
                 catch
                 {
