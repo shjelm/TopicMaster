@@ -19,6 +19,10 @@ public partial class Account_Register : System.Web.UI.Page
         FormsAuthentication.SetAuthCookie(RegisterUser.UserName, false /* createPersistentCookie */);
 
         Roles.AddUserToRole(RegisterUser.UserName, "member");
+        
+
+        
+
         string continueUrl = RegisterUser.ContinueDestinationPageUrl;
         if (String.IsNullOrEmpty(continueUrl))
         {

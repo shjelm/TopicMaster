@@ -8,6 +8,6 @@
         About
     </h2>
     <p>
-        A project in it-secuirty by Sofia Hjelm and Benny Carlsson, made in the spring of 2014.
+        A project in it-security by Sofia Hjelm and Benny Carlsson, made in the spring of 2014.
     </p>
 </asp:Content>

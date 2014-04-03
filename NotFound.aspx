@@ -2,19 +2,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <h1>
-        Kund saknas</h1>
+        Somthing is missing</h1>
     <p>
-        Tyvärr kunde kunden du efterfrågade inte hittas.</p>
-    <p class="redirect">
-        Om 5 sekunder förflyttas du automatiskt till
-        <asp:HyperLink ID="RedirectHyperLink" runat="server" NavigateUrl="~/" Text="startsidan" />.</p>
+        The thing you were looking for doesn't exist. Did you mean to look for something else?</p>
 </asp:Content>
-<%--<asp:Content ID="Content3" ContentPlaceHolderID="ScriptContent" runat="Server">
-    <script type="text/javascript">
-        $(function () {
-            $.timer(5000, function () {
-                window.location.href = '<%= ResolveClientUrl("~/") %>';
-            });
-        });      
-    </script>--%>
-<%--</asp:Content>--%>

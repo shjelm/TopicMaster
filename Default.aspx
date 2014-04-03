@@ -8,7 +8,7 @@
         Welcome to Topic Master!
     </h2>
     <p>
-       Here you can post topics and reply to others. To fully access the website you need to log in.
+       Here you can post topics and reply to others. To fully access the website you need to log in. If you don't have an account feel free to register one!
     </p>
     <p><asp:HyperLink ID="ViewPostsHyperLink" runat="server" NavigateUrl="~/ViewPosts.aspx">View posts</asp:HyperLink></p>
     <p><asp:HyperLink ID="CreateHyperLink" visible="false" runat="server" NavigateUrl="~/Create.aspx">Create post</asp:HyperLink></p>

@@ -19,7 +19,7 @@
                              ValidationGroup="ChangeUserEmailValidationGroup" SetFocusOnError=true>*</asp:RequiredFieldValidator>
     <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="You must enter a valid email."
         Display="Dynamic" Text="*" ControlToValidate="EmailEdit" SetFocusOnError="True"
-        ValidationExpression="<%$ Resources:Strings, Regular_Expression_Mail %>"
+        ValidationExpression="^[a-zA-Z0-9.!#$%&amp;'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
         CssClass="field-validation-error" ValidationGroup="ChangeUserEmailValidationGroup" />
     <p>
         <asp:LinkButton ID="SaveButton" runat="server"  OnClick="SaveButton_Click" ValidationGroup="ChangeUserEmailValidationGroup" >Save</asp:LinkButton>

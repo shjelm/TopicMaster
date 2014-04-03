@@ -1,16 +1,12 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ViewPosts.aspx.cs" Inherits="ViewPosts" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
-    <%-- Hämtar alla kunduppgifter som finns i tabellen Member i databasen via affärslogikklassen Service och
-         metoden GetMembers, som i sin tur använder klassen MemberDAL och metoden GetMembers, som skapar en
-         lista med referenser till Member-objekt; ett Member-objekt för varje post i tabellen. --%>
     <asp:ObjectDataSource ID="ServiceObjectDataSource" runat="server" SelectMethod="GetPosts"
         TypeName="Service" />
     <h1>
         Posts</h1>
     <asp:ListView ID="PostListView" runat="server" DataSourceID="ServiceObjectDataSource">
         <LayoutTemplate>
-            <%-- Platshållare för kunder --%>
             <asp:PlaceHolder ID="itemPlaceholder" runat="server" />
             <%-- "Paging" --%>
             <div id="pager">
