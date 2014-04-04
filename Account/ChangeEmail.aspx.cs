@@ -82,6 +82,8 @@ public partial class Account_ChangeEmail : System.Web.UI.Page
             ValidationGroup = "ChangeEmailVg"
         };
 
+        Service.WriteToLog(message, (int)Membership.GetUser().ProviderUserKey);
+
         Page.Validators.Add(validator);
     }
 

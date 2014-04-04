@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Web.Configuration;
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using System.Web.Security;
 
     /// <summary>
     /// Class MemberDAL.
@@ -54,6 +55,7 @@ using MySql.Data.MySqlClient;
                 }
                 catch
                 {
+                    Service.WriteToLog("Error while getting all members, for admin", (int)Membership.GetUser().ProviderUserKey);
                     throw new ApplicationException(GenericErrorMessage);
                 }
             }

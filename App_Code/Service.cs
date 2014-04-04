@@ -17,6 +17,7 @@ using System.Web.Caching;
         private PostDAL _postDAL;
         private CommentDAL _commentDAL;
         private MemberDAL _memberDAL;
+        private LogDAL _logDAL;
 
         #endregion
 
@@ -38,6 +39,10 @@ using System.Web.Caching;
             get { return _commentDAL ?? (_commentDAL = new CommentDAL()); }
         }
 
+        private LogDAL LogDAL
+        {
+            get { return _logDAL ?? (_logDAL = new LogDAL()); }
+        }
         #endregion
 
         #region Post CRUD-metoder
@@ -158,10 +163,21 @@ using System.Web.Caching;
             {
                 ApplicationException ex = new ApplicationException(comment.Error);
                 ex.Data.Add("Comment", comment);
+
+                Service.WriteToLog(ex.ToString(), (int)Membership.GetUser().ProviderUserKey);
                 throw ex;
             }
         }
         #endregion
 
-        
+        #region Logging
+
+        public static void WriteToLog(string msg, int userId)
+        {
+            LogDAL logDAL = new LogDAL();
+            logDAL.WriteToLog(msg, userId);
+        }
+
+        #endregion
+
     }

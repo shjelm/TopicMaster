@@ -6,6 +6,9 @@ using System.ComponentModel;
 using System.Data;
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using System.ComponentModel;
+using System.Reflection;
+using System.Web.Security;
 
     public class CommentDAL : DALBase
     {
@@ -57,6 +60,9 @@ using MySql.Data.MySqlClient;
                 }
                 catch
                 {
+
+                    Service.WriteToLog("Error while getting comments for a post", (int)Membership.GetUser().ProviderUserKey);
+                    
                     throw new ApplicationException(GenericErrorMessage);
                 }
             }
@@ -97,6 +103,8 @@ using MySql.Data.MySqlClient;
                 }
                 catch
                 {
+                    Service.WriteToLog("Error while inserting comment", (int)Membership.GetUser().ProviderUserKey);
+
                     throw new ApplicationException(GenericErrorMessage);
                 }
             }
@@ -126,6 +134,7 @@ using MySql.Data.MySqlClient;
                 }
                 catch
                 {
+                    Service.WriteToLog("Error while inserting comment", (int)Membership.GetUser().ProviderUserKey);
                     throw new ApplicationException(GenericErrorMessage);
                 }
             }
@@ -152,6 +161,8 @@ using MySql.Data.MySqlClient;
                 }
                 catch
                 {
+                    Service.WriteToLog("Error while deleting comment", (int)Membership.GetUser().ProviderUserKey);
+
                     throw new ApplicationException(GenericErrorMessage);
                 }
             }

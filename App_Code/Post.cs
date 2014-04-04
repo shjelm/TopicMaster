@@ -40,7 +40,7 @@ public class Post : BusinessObjectBase, ICloneable
 
             if (String.IsNullOrEmpty(value))
             {
-                base.ValidationErrors.Add("Value", "You need to enter a value");
+                base.ValidationErrors.Add("Value", "You need to enter a value for the post");
             }
             else if (value.Length > 500)
             {

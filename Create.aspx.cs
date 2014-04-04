@@ -60,6 +60,10 @@ namespace TopicMaster
         {
             if (Page.IsValid)
             {
+
+                if (this.txtimgcode.Text == this.Session["CaptchaImageText"].ToString())
+                {
+
                 try
                 {
                     MemberId = (int)Membership.GetUser().ProviderUserKey;
@@ -72,14 +76,16 @@ namespace TopicMaster
 
                     };
 
+                    Service service = new Service();
+
                     if (!post.IsValid)
                     {
                         AddErrorMessage(post);
                         return;
                     }
 
-                    Service service = new Service();
                     service.SavePost(post);
+                    Service.WriteToLog("Saved post", post.MemberId);
 
                     Response.Redirect("~/ViewPosts.aspx", false);
 
@@ -94,8 +100,14 @@ namespace TopicMaster
                 {
                     AddErrorMessage("An error occured while inserting post");
                 }
-            }
 
+                }
+                else
+                {
+                    lblmsg.Text = "Wrong image code.";
+                }
+                this.txtimgcode.Text = "";
+            }
         }
         protected void CancelButton_Click(object sender, EventArgs e)
         {
@@ -120,6 +132,7 @@ namespace TopicMaster
                 ValidationGroup = "CreatePostVg"
             };
 
+            Service.WriteToLog(message, (int)Membership.GetUser().ProviderUserKey);
             Page.Validators.Add(validator);
         }
 

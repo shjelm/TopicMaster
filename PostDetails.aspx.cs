@@ -221,6 +221,7 @@ public partial class PostDetails : System.Web.UI.Page
 
             Comment activeComment = (Comment)e.Item.DataItem;
 
+
             if (!Page.IsPostBack)
             {
                 if (activeComment.MemberId == (int)Membership.GetUser().ProviderUserKey || Roles.IsUserInRole("administrator"))
@@ -239,6 +240,8 @@ public partial class PostDetails : System.Web.UI.Page
             {
                 label.Text = name;
             }
+
+            
         }
     
         
@@ -252,6 +255,8 @@ public partial class PostDetails : System.Web.UI.Page
                 ErrorMessage = message,
                 ValidationGroup = "PostDetailsVg"
             };
+
+            Service.WriteToLog(message, (int)Membership.GetUser().ProviderUserKey);
 
             Page.Validators.Add(validator);
         }

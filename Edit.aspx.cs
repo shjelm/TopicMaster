@@ -138,6 +138,7 @@ using System.Reflection;
                 ValidationGroup = "EditPostVg"
             };
 
+            Service.WriteToLog(message, (int)Membership.GetUser().ProviderUserKey);
             Page.Validators.Add(validator);
         }
 

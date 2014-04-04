@@ -117,6 +117,4 @@
 <br /><br /></span>
         </SelectedItemTemplate>
     </asp:ListView>
-    
-    <asp:LinkButton ID="GoBackButton" runat="server" PostBackUrl="~/ViewPosts.aspx" >Go back</asp:LinkButton>
 </asp:Content>

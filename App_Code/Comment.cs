@@ -37,7 +37,7 @@ public class Comment: BusinessObjectBase, ICloneable
 
             if (String.IsNullOrEmpty(value))
             {
-                base.ValidationErrors.Add("Value","You must enter a post");
+                base.ValidationErrors.Add("Value","You must enter a value for the comment");
             }
             else if (value.Length > 500)
             {

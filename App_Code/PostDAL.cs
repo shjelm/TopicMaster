@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using System.Web.Security;
 
     public class PostDAL : DALBase
     {
@@ -51,6 +52,8 @@ using MySql.Data.MySqlClient;
                 }
                 catch
                 {
+                    Service.WriteToLog("Error while getting posts", (int)Membership.GetUser().ProviderUserKey);
+
                     throw new ApplicationException(GenericErrorMessage);
                 }
             }
@@ -94,6 +97,7 @@ using MySql.Data.MySqlClient;
                 }
                 catch
                 {
+                    Service.WriteToLog("Error while getting a post", (int)Membership.GetUser().ProviderUserKey);
                     throw new ApplicationException(GenericErrorMessage);
                 }
             }
@@ -133,6 +137,7 @@ using MySql.Data.MySqlClient;
                 }
                 catch
                 {
+                    Service.WriteToLog("Error while inserting a post", (int)Membership.GetUser().ProviderUserKey);
                     throw new ApplicationException(GenericErrorMessage);
                 }
             }
@@ -161,6 +166,7 @@ using MySql.Data.MySqlClient;
                 }
                 catch
                 {
+                    Service.WriteToLog("Error while updating a post", (int)Membership.GetUser().ProviderUserKey);
                     throw new ApplicationException(GenericErrorMessage);
                 }
             }
@@ -187,6 +193,7 @@ using MySql.Data.MySqlClient;
                 }
                 catch
                 {
+                    Service.WriteToLog("Error while deleting a post", (int)Membership.GetUser().ProviderUserKey);
                     throw new ApplicationException(GenericErrorMessage);
                 }
             }
@@ -224,6 +231,7 @@ using MySql.Data.MySqlClient;
                 }
                 catch
                 {
+                    Service.WriteToLog("Error while getting username", (int)Membership.GetUser().ProviderUserKey);
                     throw new ApplicationException(GenericErrorMessage);
                 }
             }
