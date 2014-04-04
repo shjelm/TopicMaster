@@ -10,8 +10,11 @@
     </div>
     <div class="editor-field">
         <asp:Label ID="PostLabel" runat="server" />
-        
-    </div>
+        <div>
+        <p>Created by: 
+            <asp:Label ID="AuthorLabel" runat="server" /></p>
+        </div>
+    </div
     <p>
         <asp:LinkButton ID="EditPostButton" runat="server" Visible="false">Edit</asp:LinkButton>
         <asp:LinkButton ID="DeletePostButton" runat="server" OnCommand="DeletePostButton_Command" Visible="false">Delete</asp:LinkButton></p>
@@ -41,6 +44,9 @@
             </br>
             <asp:Label ID="ValueLabel" runat="server" Text='<%# Eval("Value") %>' />
             <br />
+            <div>
+                <p>Created by: <asp:Label ID="AuthorCommentLabel" runat="server" /></p>
+            </div>
             <asp:LinkButton ID="EditButton" runat="server" CommandName="Edit" Text="Edit" Visible="false" />
             <asp:LinkButton ID="DeleteButton" runat="server" CommandName="Delete"  Visible="false" 
                 Text="Delete"  OnClientClick="return confirm('Are you sure you want to delete your comment?');"/>
@@ -52,6 +58,9 @@
             </br>
             <asp:TextBox ID="ValueTextBox" runat="server" Text='<%# Bind("Value") %>' Width="500px" Height="150px" TextMode="MultiLine" />
             <br />
+            <div>
+                <p>Created by: <asp:Label ID="AuthorCommentLabel" runat="server" /></p>
+            </div>
             <asp:LinkButton ID="UpdateButton" runat="server" CommandName="Update"
                 Text="Update" />
             <asp:LinkButton ID="CancelButton" runat="server" CommandName="Cancel" 
@@ -78,6 +87,9 @@
             </br>
             <asp:Label ID="ValueLabel" runat="server" Text='<%# Eval("Value") %>' />
             <br />
+            <div>
+                <p>Created by: <asp:Label ID="AuthorCommentLabel" runat="server" /></p>
+            </div>
             <asp:LinkButton ID="EditButton" runat="server" CommandName="Edit" Visible="false" Text="Edit" />
             <asp:LinkButton ID="DeleteButton" runat="server" CommandName="Delete" Visible="false" 
                 Text="Delete" OnClientClick="return confirm('Are you sure you want to delete your comment?');"/>
@@ -96,6 +108,9 @@
             </br>
             <asp:Label ID="ValueLabel" runat="server" Text='<%# Eval("Value") %>' />
             <br />
+            <div>
+                <p>Created by: <asp:Label ID="AuthorCommentLabel" runat="server" /></p>
+            </div>
             <asp:LinkButton ID="EditButton" runat="server" CommandName="Edit" Text="Edit" Visible="false" />
             <asp:LinkButton ID="DeleteButton" runat="server" CommandName="Delete" Visible="false" 
                 Text="Delete" OnClientClick="return confirm('Are you sure you want to delete your comment?');"/>

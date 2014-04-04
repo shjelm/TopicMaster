@@ -193,4 +193,39 @@ using MySql.Data.MySqlClient;
         }
 
         #endregion
+
+        public string GetUserName(int userId)
+        {
+            using (MySqlConnection conn = CreateConnection())
+            {
+                try
+                {
+                    string Author;
+
+                    MySqlCommand cmd = new MySqlCommand("GetUserNameByUserId", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@UserId", userId);
+
+                    conn.Open();
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        reader.Read();
+                        {
+                            int nameIndex = reader.GetOrdinal("name");
+
+                            Author = reader.GetString(nameIndex);
+
+                            return Author;
+                        }
+                    }
+                    return null;
+                }
+                catch
+                {
+                    throw new ApplicationException(GenericErrorMessage);
+                }
+            }
+        }
     }

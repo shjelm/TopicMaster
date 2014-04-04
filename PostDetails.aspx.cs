@@ -48,6 +48,8 @@ public partial class PostDetails : System.Web.UI.Page
                 Service service = new Service();
                 post = service.GetPostByPostId(postId);
 
+                post.Author = service.GetUserName(post.MemberId);
+
 
                 if ((int)Membership.GetUser().ProviderUserKey == post.MemberId || Roles.IsUserInRole("administrator"))
                 {
@@ -64,6 +66,7 @@ public partial class PostDetails : System.Web.UI.Page
             if (post != null)
             {
                 PostLabel.Text = Server.HtmlEncode(post.Value);
+                AuthorLabel.Text = Server.HtmlEncode(post.Author);
 
                 EditPostButton.PostBackUrl = String.Format("~/Edit.aspx?id={0}", post.PostId);
                 EditPostButton.Enabled = true;
@@ -113,22 +116,13 @@ public partial class PostDetails : System.Web.UI.Page
                 e.ExceptionHandled = true;
             }
         }
-        
-        /// <summary>
-        /// TODO: Skriv beskrivning till PostDataSource_Inserting.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+
         protected void CommentDataSource_Inserting(object sender, ObjectDataSourceMethodEventArgs e)
         {
-            // e.InputParameters[0] refererar till ett Member-objekt som blivit skapat och initierat
-            // med de värden som textfälten innhåller hos klienten; typomvandlas till en referens av typen Post.
             var comment = e.InputParameters[0] as Comment;
             comment.MemberId = (int)Membership.GetUser().ProviderUserKey;
             comment.PostId = Convert.ToInt32(Request.QueryString["id"]);
 
-            // Om contact refererar till null eller om Post-objektet inte klarar valideringen så
-            // visa ett felmeddelande, och hindra händelsen från att forsätta, d.v.s. det kommer inte ske någon INSERT i databasen.
             if (comment == null)
             {
                 AddErrorMessage("An unexpected error occured");
@@ -234,7 +228,17 @@ public partial class PostDetails : System.Web.UI.Page
                     EditButton.Visible = true;
                     DeleteButton.Visible = true;
                 }
-            }            
+            }
+
+            Service service = new Service();
+            string name = service.GetUserName(activeComment.MemberId);
+
+            Label label = new Label();
+            label = (Label)e.Item.FindControl("AuthorCommentLabel");
+            if (label != null)
+            {
+                label.Text = name;
+            }
         }
     
         

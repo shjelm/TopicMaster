@@ -95,6 +95,11 @@ using System.Web.Caching;
             }
         }
 
+        public string GetUserName(int userId)
+        {
+            return PostDAL.GetUserName(userId);   
+        }
+
         #endregion
 
         
@@ -157,4 +162,6 @@ using System.Web.Caching;
             }
         }
         #endregion
+
+        
     }

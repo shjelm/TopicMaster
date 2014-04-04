@@ -10,6 +10,7 @@ public class Post : BusinessObjectBase, ICloneable
     #region Fält
 
     private string _value;
+    private string _author;
 
     #endregion
 
@@ -19,6 +20,7 @@ public class Post : BusinessObjectBase, ICloneable
     {   this.MemberId = 0;
         this.PostId = 0;
         this.Value = null;
+        this.Author = null;
     }
 
     #endregion
@@ -27,6 +29,7 @@ public class Post : BusinessObjectBase, ICloneable
 
     public int MemberId { get; set; }
     public int PostId { get; set; }
+    public string Author { get; set; }
 
     public string Value
     {

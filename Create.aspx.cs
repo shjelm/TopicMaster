@@ -25,6 +25,7 @@ namespace TopicMaster
 
         private int _postId;
         private int _memberId;
+        private string _author;
 
         #endregion
 
@@ -47,6 +48,12 @@ namespace TopicMaster
             get { return PostValueTextBox.Text; }
             set { PostValueTextBox.Text = value; }
         }
+
+        public string Author
+        {
+            get { return this._author; }
+            set { this._author = value; }
+        }
         #endregion
 
         protected void SaveButton_Click(object sender, EventArgs e)
@@ -60,7 +67,9 @@ namespace TopicMaster
                     {
                         MemberId = MemberId,
                         Value = Value,
-                        PostId = PostId
+                        PostId = PostId,
+                        Author = Author
+
                     };
 
                     if (!post.IsValid)
