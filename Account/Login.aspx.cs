@@ -25,6 +25,22 @@ public partial class Account_Login : System.Web.UI.Page
         Service.WriteToLog("Failed login:"+ LoginUser.UserName, 0);
     }
 
+    protected void OnLoggingIn(object sender, System.Web.UI.WebControls.LoginCancelEventArgs e)
+    {   
+        TextBox txtimgcode = (TextBox)LoginUser.FindControl("txtimgcode");
+        Label lblmsg = (Label)LoginUser.FindControl("lblmsg");
+        if (txtimgcode.Text == this.Session["CaptchaImageText"].ToString())
+        {
+            e.Cancel = false;
+        }
+        else
+        {
+            lblmsg.Text = "Wrong image code";
+            e.Cancel = true;
+        }
+        txtimgcode.Text = "";
+    }
+
     protected void LoginUser_LoggedIn(object sender, EventArgs e)
     {
         if (LoginUser.UserName != null)

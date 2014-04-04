@@ -28,4 +28,19 @@ public partial class Account_Register : System.Web.UI.Page
         Response.Redirect(continueUrl);
     }
 
+    public void RegisterUser_CreatingUser(object sender, LoginCancelEventArgs e)
+    {
+
+        TextBox txtimgcode = (TextBox)RegisterUser.CreateUserStep.ContentTemplateContainer.FindControl("txtimgcode");
+        Label lblmsg = (Label)RegisterUser.CreateUserStep.ContentTemplateContainer.FindControl("lblmsg");
+        if (txtimgcode.Text == this.Session["CaptchaImageText"].ToString())
+        {
+            e.Cancel = false;
+        }
+        else
+        {
+            e.Cancel = true;
+        }
+        txtimgcode.Text = "";
+    }
 }

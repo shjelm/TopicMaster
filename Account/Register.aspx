@@ -4,7 +4,7 @@
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
-    <asp:CreateUserWizard ID="RegisterUser" runat="server" EnableViewState="false" OnCreatedUser="RegisterUser_CreatedUser">
+    <asp:CreateUserWizard ID="RegisterUser" runat="server" EnableViewState="false" OnCreatedUser="RegisterUser_CreatedUser" OnCreatingUser="RegisterUser_CreatingUser">
         <LayoutTemplate>
             <asp:PlaceHolder ID="wizardStepPlaceholder" runat="server"></asp:PlaceHolder>
             <asp:PlaceHolder ID="navigationPlaceholder" runat="server"></asp:PlaceHolder>
@@ -61,9 +61,17 @@
                                      ValidationGroup="RegisterUserValidationGroup">*</asp:CompareValidator>
                             </p>
                         </fieldset>
+                        <asp:Label ID="lblmsg" runat="server" ForeColor="Red" Text=""></asp:Label>
+                        <br />
+                        </div>
+                        <asp:Label ID="TextLabel" runat="server" Text="Enter the code below:"></asp:Label>
+                        <asp:TextBox ID="txtimgcode" runat="server" Width="200px"></asp:TextBox>
+                        <br />
+                        <asp:Image ID="Image1" runat="server" ImageUrl="~/CImage.aspx"/>
+                        <br />
                         <p class="submitButton">
-                            <asp:Button ID="CreateUserButton" runat="server" CommandName="MoveNext" Text="Create User" 
-                                 ValidationGroup="RegisterUserValidationGroup" />
+                            <asp:Button ID="CreateUserButton" runat="server" Text="Create User" 
+                                 ValidationGroup="RegisterUserValidationGroup"  CommandName="MoveNext"/>
                         </p>
                     </div>
                 </ContentTemplate>

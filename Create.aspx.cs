@@ -60,10 +60,6 @@ namespace TopicMaster
         {
             if (Page.IsValid)
             {
-
-                if (this.txtimgcode.Text == this.Session["CaptchaImageText"].ToString())
-                {
-
                 try
                 {
                     MemberId = (int)Membership.GetUser().ProviderUserKey;
@@ -100,13 +96,6 @@ namespace TopicMaster
                 {
                     AddErrorMessage("An error occured while inserting post");
                 }
-
-                }
-                else
-                {
-                    lblmsg.Text = "Wrong image code.";
-                }
-                this.txtimgcode.Text = "";
             }
         }
         protected void CancelButton_Click(object sender, EventArgs e)

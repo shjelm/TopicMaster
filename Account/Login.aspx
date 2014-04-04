@@ -12,7 +12,7 @@
         <asp:HyperLink ID="RegisterHyperLink" runat="server" EnableViewState="false">Register</asp:HyperLink> if you don't have an account.
     </p>
     <p>You only have 5 attempts to log in before your account is locked. Contact support for more help.</p>
-    <asp:Login ID="LoginUser" runat="server" EnableViewState="false" RenderOuterTable="false" OnLoggedIn="LoginUser_LoggedIn" OnLoginError="OnLoginError">
+    <asp:Login ID="LoginUser" runat="server" EnableViewState="false" RenderOuterTable="false" OnLoggingIn="OnLoggingIn"  OnLoggedIn="LoginUser_LoggedIn" OnLoginError="OnLoginError">
         <LayoutTemplate>
             <span class="failureNotification">
                 <asp:Literal ID="FailureText" runat="server"></asp:Literal>
@@ -36,6 +36,14 @@
                         <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ControlToValidate="Password" 
                              CssClass="failureNotification" ErrorMessage="Password is required." ToolTip="Password is required." 
                              ValidationGroup="LoginUserValidationGroup">*</asp:RequiredFieldValidator>
+                    </p>
+                    <p>
+                    <asp:Label ID="lblmsg" runat="server" ForeColor="Red" Text=""></asp:Label>
+                        <asp:Label ID="TextLabel" runat="server" Text="Enter the code below:"></asp:Label>
+                        <asp:TextBox ID="txtimgcode" runat="server" Width="190px"></asp:TextBox>
+                        <br />
+                        <asp:Image ID="Image1" runat="server" ImageUrl="~/CImage.aspx"/>
+                        <br />
                     </p>
                     <p>
                         <asp:CheckBox ID="RememberMe" runat="server"/>

@@ -13,7 +13,7 @@
     <p>
         New passwords are required to be a minimum of <%= Membership.MinRequiredPasswordLength %> characters in length.
     </p>
-    <asp:ChangePassword ID="ChangeUserPassword" runat="server" CancelDestinationPageUrl="~/" EnableViewState="false" RenderOuterTable="false" 
+    <asp:ChangePassword ID="ChangeUserPassword" runat="server" OnChangePasswordError="ChangeUserPassword_ChangePasswordError" CancelDestinationPageUrl="~/" EnableViewState="false" RenderOuterTable="false" 
          SuccessPageUrl="ChangePasswordSuccess.aspx">
         <ChangePasswordTemplate>
             <span class="failureNotification">
